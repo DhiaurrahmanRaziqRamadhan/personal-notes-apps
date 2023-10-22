@@ -12,6 +12,7 @@ class NotesApps extends React.Component {
 
     this.onDeleteHandler = this.onDeleteHandler.bind(this);
     this.onAddNotesHandler = this.onAddNotesHandler.bind(this);
+    this.onToggleArchived = this.onToggleArchived.bind(this);
   }
 
   onDeleteHandler(id) {
@@ -36,14 +37,33 @@ class NotesApps extends React.Component {
     })
   }
 
+  onToggleArchived(id) {
+    this.setState((prevState) => {
+      const updatedNotes = prevState.notes.map((note) => {
+        if (note.id === id) {
+          return {
+            ...note,
+            archived: !note.archived, // Mengubah nilai archived
+          };
+        }
+        return note;
+      });
+      return { notes: updatedNotes };
+    });
+  }
+
   render() {
+    // Pisahkan catatan menjadi dua kelompok berdasarkan archived
+    const activeNotes = this.state.notes.filter((note) => !note.archived);
+    const archivedNotes = this.state.notes.filter((note) => note.archived);
+
     return (
       <div className="notes-apps">
         <h1>Notes Apps</h1>
-        <NotesInput addNotes={this.onAddNotesHandler}/>
-        <NotesList notes={this.state.notes} onDelete={this.onDeleteHandler}/>
+        <NotesInput addNotes={this.onAddNotesHandler} />
+        <NotesList activeNotes={activeNotes} archivedNotes={archivedNotes} onDelete={this.onDeleteHandler} onToggleArchived={this.onToggleArchived}/>
       </div>
-    )
+    );
   }
 }
 

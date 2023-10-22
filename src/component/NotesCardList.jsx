@@ -1,7 +1,7 @@
 import React from "react";
 import NotesCards from "./NotesCards";
 
-function NotesCardList({notes, buttonText, onDelete}) {
+function NotesCardList({notes, buttonText, onDelete, onToggleArchived}) {
   if (notes.length === 0) {
     return (
       <div className="notes-card-list-empty">
@@ -18,6 +18,7 @@ function NotesCardList({notes, buttonText, onDelete}) {
             key={note.id}
             buttonText={buttonText}
             onDelete={onDelete}
+            onToggleArchived={onToggleArchived}
           />
         ))
       }

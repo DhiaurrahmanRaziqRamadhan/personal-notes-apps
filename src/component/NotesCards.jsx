@@ -1,7 +1,8 @@
 import React from "react";
 import DeleteButton from "./DeleteButton";
+import ArchivedButton from "./ArchivedButton";
 
-function NotesCards({title, body, createdAt, buttonText, id, onDelete}) {
+function NotesCards({ title, body, createdAt, archived, id, onDelete, onToggleArchived }) {
   return (
     <div className="notes-card" >
       <div className="notes-content">
@@ -11,7 +12,7 @@ function NotesCards({title, body, createdAt, buttonText, id, onDelete}) {
       </div>
       <div className="notes-btn">
         <DeleteButton id={id} onDelete={onDelete}/>
-        <button className="btn">{buttonText}</button>
+        <ArchivedButton id={id} archived={archived} onToggleArchived={onToggleArchived} />
       </div>
     </div>
   )
