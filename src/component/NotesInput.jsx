@@ -15,11 +15,14 @@ class NotesInput extends React.Component {
   }
 
   onTitleChangeEventListener(e) {
-    this.setState(() => {
-      return {
-        title: e.target.value,
-      }
-    })
+    const inputValue = e.target.value;
+
+    // Batasi panjang judul tidak lebih dari 50 karakter
+    if (inputValue.length <= 50) {
+      this.setState({
+        title: inputValue,
+      });
+    }
   }
 
   onBodyChangeEventListener(e) {
@@ -36,10 +39,13 @@ class NotesInput extends React.Component {
   }
 
   render() {
+    const remainingCharacters = 50 - this.state.title.length;
+
     return (
       <form className="notes-input" onSubmit={this.onSubmitEventListener}>
+        <label><p className="sisaKarakter">Sisa karakter: {remainingCharacters}</p></label>
         <label htmlFor="judul">Judul</label>
-        <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventListener} id="judul" required/>
+        <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventListener} id="judul"  maxLength="50" required/>
         <label htmlFor="catatan">Catatan</label>
         <textarea id="catatan" value={this.state.body} onChange={this.onBodyChangeEventListener} placeholder="Buat catatanmu disini..."></textarea>
         <button className="inputBtn" type="submit">Tambah</button>

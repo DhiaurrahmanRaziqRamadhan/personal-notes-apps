@@ -6,9 +6,9 @@ function NotesCards({ title, body, createdAt, archived, id, onDelete, onToggleAr
   return (
     <div className="notes-card" >
       <div className="notes-content">
-        <h3>{title}</h3>
-        <h5>{createdAt}</h5>
-        <p>{body}</p>
+        <p className="title-content">{title}</p>
+        <p className="date-content">{createdAt}</p>
+        <p className="body-content">{body}</p>
       </div>
       <div className="notes-btn">
         <DeleteButton id={id} onDelete={onDelete}/>

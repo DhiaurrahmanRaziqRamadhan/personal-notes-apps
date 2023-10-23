@@ -2,6 +2,7 @@ import React from "react";
 import { formatDate, formattedData } from "../utils/data";
 import NotesInput from "./NotesInput";
 import NotesList from "./NotesList";
+import Navbar from "./Navbar";
 
 class NotesApps extends React.Component {
   constructor(props) {
@@ -59,9 +60,11 @@ class NotesApps extends React.Component {
 
     return (
       <div className="notes-apps">
-        <h1>Notes Apps</h1>
-        <NotesInput addNotes={this.onAddNotesHandler} />
-        <NotesList activeNotes={activeNotes} archivedNotes={archivedNotes} onDelete={this.onDeleteHandler} onToggleArchived={this.onToggleArchived}/>
+        <Navbar/>
+        <div className="content">
+          <NotesInput addNotes={this.onAddNotesHandler} />
+          <NotesList activeNotes={activeNotes} archivedNotes={archivedNotes} onDelete={this.onDeleteHandler} onToggleArchived={this.onToggleArchived}/>
+        </div>
       </div>
     );
   }

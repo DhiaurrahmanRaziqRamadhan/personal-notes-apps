@@ -6,8 +6,12 @@
 }
 
 .notes-apps {
-  margin: 4rem auto;
+  margin: 0 auto;
   width: 100%;
+}
+
+.content {
+  margin: 0 auto;
   max-width: 1000px;
 }
 
@@ -22,7 +26,7 @@
   font-size: 1.3rem;
 }
 
-.notes-input input,.notes-input textarea {
+.notes-input input,.notes-input textarea,.search-input {
   margin-bottom: 1rem;
   font-size: 1rem;
   padding: 8px 16px;
@@ -44,6 +48,12 @@
   cursor: pointer;
   color: white;
   background-color: #16a34a;
+}
+
+.sisaKarakter {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: end;
 }
 
 textarea {
@@ -119,4 +129,28 @@ textarea {
   cursor: pointer;
   background-color: #facc15;
   color: white;
+}
+
+.title-content {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.date-content {
+  font-size: .9rem;
+  color: #64748b;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 4rem;
+  width: 100%;
+  border-bottom: 1px solid #64748b;
+}
+
+.navbar .title-navbar{
+  font-size: 2rem;
+  font-weight: 600;
 }
