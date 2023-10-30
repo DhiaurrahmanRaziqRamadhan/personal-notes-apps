@@ -35,17 +35,23 @@ class NotesInput extends React.Component {
 
   onSubmitEventListener(e) {
     e.preventDefault()
-    this.props.addNotes(this.state);
+
+    if(this.state.title.length === 0 || this.state.body.length === 0) {
+      alert("Judul atau isi catatan tidak boleh kosong")
+    } else {
+      this.props.addNotes(this.state);
+    }
   }
 
   render() {
-    const remainingCharacters = 50 - this.state.title.length;
-
+    // const remainingCharacters = 50 - this.state.title.length;
+    console.log("judul:", this.state.title.length)
+    console.log("body:", this.state.body.length)
     return (
       <form className="notes-input" onSubmit={this.onSubmitEventListener}>
-        <label><p className="sisaKarakter">Sisa karakter: {remainingCharacters}</p></label>
+        <label><p className="sisaKarakter">Sisa karakter: {50 - this.state.title.length}</p></label>
         <label htmlFor="judul">Judul</label>
-        <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventListener} id="judul"  maxLength="50" required/>
+        <input type="text" placeholder="Judul" value={this.state.title} onChange={this.onTitleChangeEventListener} id="judul"/>
         <label htmlFor="catatan">Catatan</label>
         <textarea id="catatan" value={this.state.body} onChange={this.onBodyChangeEventListener} placeholder="Buat catatanmu disini..."></textarea>
         <button className="inputBtn" type="submit">Tambah</button>
