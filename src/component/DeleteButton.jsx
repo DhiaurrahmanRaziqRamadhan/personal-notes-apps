@@ -1,8 +1,6 @@
-import React from "react";
-
-function DeleteButton({id, onDelete}) {
+const DeleteButton = ({id, onDelete}) => {
   return (
-    <button className="deleteBtn" onClick={() => onDelete(id)}>Hapus</button>
+    <button className="deleteBtn bg-red-600 w-12 h-12 rounded-full shadow-lg hover:opaci" onClick={() => onDelete(id)}><i className="fa-solid fa-trash"></i></button>
   )
 }
 

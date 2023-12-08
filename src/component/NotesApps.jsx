@@ -1,27 +1,36 @@
-import React from "react";
-import { formatDate, formattedData } from "../utils/data";
-import NotesInput from "./NotesInput";
-import NotesList from "./NotesList";
-import Navbar from "./Navbar";
+import React from 'react'
+import { formatDate, formattedData } from '../utils/data'
+import NotesInput from './NotesInput'
+import NotesList from './NotesList'
+import Navbar from './Navbar'
+import '../styles/index.css'
 
 class NotesApps extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       notes: formattedData,
+      darkMode: true,
     }
 
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onAddNotesHandler = this.onAddNotesHandler.bind(this);
-    this.onToggleArchived = this.onToggleArchived.bind(this);
+    this.onDeleteHandler = this.onDeleteHandler.bind(this)
+    this.onAddNotesHandler = this.onAddNotesHandler.bind(this)
+    this.onToggleArchived = this.onToggleArchived.bind(this)
+    this.toggleDarkMode = this.toggleDarkMode.bind(this)
+  }
+
+  toggleDarkMode() {
+    this.setState((prevState) => ({
+      darkMode: !prevState.darkMode,
+    }))
   }
 
   onDeleteHandler(id) {
-    const notes = this.state.notes.filter(notes => notes.id !== id);
-    this.setState({notes});
+    const notes = this.state.notes.filter((notes) => notes.id !== id)
+    this.setState({ notes })
   }
 
-  onAddNotesHandler({title,body}) {
+  onAddNotesHandler({ title, body }) {
     this.setState((prevState) => {
       return {
         notes: [
@@ -30,10 +39,10 @@ class NotesApps extends React.Component {
             id: +new Date(),
             title,
             body,
-            createdAt:formatDate(+new Date()),
+            createdAt: formatDate(+new Date()),
             archived: false,
-          }
-        ]
+          },
+        ],
       }
     })
   }
@@ -45,29 +54,34 @@ class NotesApps extends React.Component {
           return {
             ...note,
             archived: !note.archived, // Mengubah nilai archived
-          };
+          }
         }
-        return note;
-      });
-      return { notes: updatedNotes };
-    });
+        return note
+      })
+      return { notes: updatedNotes }
+    })
   }
 
   render() {
     // Pisahkan catatan menjadi dua kelompok berdasarkan archived
-    const activeNotes = this.state.notes.filter((note) => !note.archived);
-    const archivedNotes = this.state.notes.filter((note) => note.archived);
+    const activeNotes = this.state.notes.filter((note) => !note.archived)
+    const archivedNotes = this.state.notes.filter((note) => note.archived)
 
     return (
-      <div className="notes-apps">
-        <Navbar/>
-        <div className="content">
+      <div className='notes-apps'>
+        <Navbar />
+        <div className='content'>
           <NotesInput addNotes={this.onAddNotesHandler} />
-          <NotesList activeNotes={activeNotes} archivedNotes={archivedNotes} onDelete={this.onDeleteHandler} onToggleArchived={this.onToggleArchived}/>
+          <NotesList
+            activeNotes={activeNotes}
+            archivedNotes={archivedNotes}
+            onDelete={this.onDeleteHandler}
+            onToggleArchived={this.onToggleArchived}
+          />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default NotesApps;
+export default NotesApps

@@ -1,18 +1,16 @@
-import React from "react";
-import NotesCards from "./NotesCards";
+import NotesCards from './NotesCards'
 
-function NotesCardList({notes, buttonText, onDelete, onToggleArchived}) {
+const NotesCardList = ({ notes, buttonText, onDelete, onToggleArchived }) => {
   if (notes.length === 0) {
     return (
-      <div className="notes-card-list-empty">
+      <div className='notes-card-list-empty text-center my-8'>
         <p>Tidak ada Catatan</p>
       </div>
     )
   } else {
     return (
-      <div className="notes-card-list">
-      {
-        notes.map((note) => (
+      <div className='notes-card-list grid md:grid-cols-4 gap-2 grip-cols-2'>
+        {notes?.map((note) => (
           <NotesCards
             {...note}
             key={note.id}
@@ -20,11 +18,10 @@ function NotesCardList({notes, buttonText, onDelete, onToggleArchived}) {
             onDelete={onDelete}
             onToggleArchived={onToggleArchived}
           />
-        ))
-      }
-    </div>
+        ))}
+      </div>
     )
   }
 }
 
-export default NotesCardList;
+export default NotesCardList

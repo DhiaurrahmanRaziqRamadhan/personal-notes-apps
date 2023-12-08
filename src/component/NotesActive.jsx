@@ -1,11 +1,15 @@
-import React from "react";
-import NotesCardList from "./NotesCardList";
+import NotesCardList from './NotesCardList'
 
-function NotesActive({notes, onDelete, onToggleArchived}){
+const NotesActive = ({ notes, onDelete, onToggleArchived }) => {
   return (
-    <div className="notes-active">
-      <p className="title-section">Catatan Aktif</p>
-      <NotesCardList notes={notes} buttonText="Arsipkan" onDelete={onDelete} onToggleArchived={onToggleArchived}/>
+    <div className='notes-active mb-4'>
+      <p className='title-section text-2xl mb-4'>Catatan Aktif</p>
+      <NotesCardList
+        notes={notes}
+        buttonText='Arsipkan'
+        onDelete={onDelete}
+        onToggleArchived={onToggleArchived}
+      />
     </div>
   )
 }

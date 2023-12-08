@@ -1,11 +1,15 @@
-import React from "react";
-import NotesCardList from "./NotesCardList";
+import NotesCardList from './NotesCardList'
 
-function NotesArchive({notes, onDelete, onToggleArchived}) {
+const NotesArchive = ({ notes, onDelete, onToggleArchived }) => {
   return (
-    <div className="notes-archive">
-      <p className="title-section">Arsip</p>
-      <NotesCardList notes={notes} buttonText="Pindahkan" onDelete={onDelete} onToggleArchived={onToggleArchived}/>
+    <div className='notes-archive mb-4'>
+      <p className='title-section text-2xl mb-4'>Arsip</p>
+      <NotesCardList
+        notes={notes}
+        buttonText='Pindahkan'
+        onDelete={onDelete}
+        onToggleArchived={onToggleArchived}
+      />
     </div>
   )
 }
