@@ -45,49 +45,51 @@ class NotesInput extends React.Component {
 
   render() {
     return (
-      <form
-        className='notes-input flex flex-col w-[500px] mx-auto my-5 mt-32'
-        onSubmit={this.onSubmitEventListener}
-      >
-        <label>
-          <p className='sisaKarakter text-end'>
-            Sisa karakter: {50 - this.state.title.length}
-          </p>
-        </label>
-        <label
-          htmlFor='judul'
-          className='hidden'
+      <div className='px-4 md:w-[500px] xl:w-[550px] mx-auto '>
+        <form
+          className='notes-input flex flex-col my-5 '
+          onSubmit={this.onSubmitEventListener}
         >
-          Judul
-        </label>
-        <input
-          type='text'
-          placeholder='tulis judulmu disini...'
-          value={this.state.title}
-          onChange={this.onTitleChangeEventListener}
-          id='judul'
-          className='border-[1px] rounded-lg py-2 px-4 mb-4'
-        />
-        <label
-          htmlFor='catatan'
-          className='hidden'
-        >
-          Catatan
-        </label>
-        <textarea
-          id='catatan'
-          value={this.state.body}
-          onChange={this.onBodyChangeEventListener}
-          placeholder='Buat catatanmu disini...'
-          className='border-[1px] rounded-lg py-2 px-4 mb-4'
-        ></textarea>
-        <button
-          className='inputBtn border-2 border-teal-500 text-teal-500 px-4 py-1 rounded-lg text-xl bg-transparent transition-all ease-in-out duration-200 hover:bg-teal-500 hover:text-white'
-          type='submit'
-        >
-          Buat
-        </button>
-      </form>
+          <label>
+            <p className='sisaKarakter text-end'>
+              Sisa karakter: {50 - this.state.title.length}
+            </p>
+          </label>
+          <label
+            htmlFor='judul'
+            className='hidden'
+          >
+            Judul
+          </label>
+          <input
+            type='text'
+            placeholder='tulis judulmu disini...'
+            value={this.state.title}
+            onChange={this.onTitleChangeEventListener}
+            id='judul'
+            className='bg-transparent outline-none ring-1 ring-slate-500 p-4 mb-4 rounded hover:ring-slate-800 dark:hover:ring-slate-200 duration-300'
+          />
+          <label
+            htmlFor='catatan'
+            className='hidden'
+          >
+            Catatan
+          </label>
+          <textarea
+            id='catatan'
+            value={this.state.body}
+            onChange={this.onBodyChangeEventListener}
+            placeholder='Buat catatanmu disini...'
+            className='bg-transparent outline-none ring-1 ring-slate-500 p-4 mb-4 rounded hover:ring-slate-800 dark:hover:ring-slate-200 duration-300'
+          ></textarea>
+          <button
+            className='border-[1px] border-[#0B652D] text-[#0B652D] px-4 py-1 rounded text-xl bg-transparent transition-all ease-in-out duration-200 hover:bg-[#0B652D] hover:text-white'
+            type='submit'
+          >
+            Buat
+          </button>
+        </form>
+      </div>
     )
   }
 }

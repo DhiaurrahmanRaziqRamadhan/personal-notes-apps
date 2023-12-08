@@ -11,13 +11,13 @@ const NotesCards = ({
   onToggleArchived,
 }) => {
   return (
-    <div className='flex flex-col justify-between gap-2 notes-card bg-indigo-500 rounded-xl text-white shadow-lg'>
-      <div className='notes-content p-4'>
-        <p className='title-content text-xl font-bold'>{title}</p>
-        <p className='date-content text-sm font-light'>{createdAt}</p>
-        <p className='body-content text-sm'>{body}</p>
+    <div className='flex flex-col justify-between gap-2 rounded-xl border-[1px] border-slate-500'>
+      <div className='p-4'>
+        <p className='text-xl font-semibold line-clamp-1'>{title}</p>
+        <p className='text-sm font-light'>{createdAt}</p>
+        <p className='text-sm'>{body}</p>
       </div>
-      <div className='notes-btn flex justify-end p-4 gap-2'>
+      <div className='flex justify-end p-4 gap-2'>
         <DeleteButton
           id={id}
           onDelete={onDelete}

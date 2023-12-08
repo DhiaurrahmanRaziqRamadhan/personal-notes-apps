@@ -8,7 +8,7 @@ const NotesList = ({
   onToggleArchived,
 }) => {
   return (
-    <div className='notes-list w-[500px] mx-auto md:w-[1000px]'>
+    <div className='flex flex-col px-4 gap-4 xl:w-[1000px] mx-auto'>
       <NotesActive
         notes={activeNotes}
         onDelete={onDelete}

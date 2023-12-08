@@ -9,7 +9,7 @@ const NotesCardList = ({ notes, buttonText, onDelete, onToggleArchived }) => {
     )
   } else {
     return (
-      <div className='notes-card-list grid md:grid-cols-4 gap-2 grip-cols-2'>
+      <div className='grid grid-cols md:grid-cols-2 xl:grid-cols-4 gap-4'>
         {notes?.map((note) => (
           <NotesCards
             {...note}

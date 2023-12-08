@@ -9,7 +9,7 @@ export default {
     extend: {
       fontFamily: {
         'Poppins': ['Poppins']
-      }
+      },
     },
   },
   plugins: [],

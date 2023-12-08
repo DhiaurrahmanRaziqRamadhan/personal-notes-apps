@@ -2,8 +2,8 @@ import NotesCardList from './NotesCardList'
 
 const NotesActive = ({ notes, onDelete, onToggleArchived }) => {
   return (
-    <div className='notes-active mb-4'>
-      <p className='title-section text-2xl mb-4'>Catatan Aktif</p>
+    <div>
+      <p className='text-2xl'>Catatan Aktif</p>
       <NotesCardList
         notes={notes}
         buttonText='Arsipkan'

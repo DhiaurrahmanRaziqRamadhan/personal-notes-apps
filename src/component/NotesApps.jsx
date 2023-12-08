@@ -1,87 +1,89 @@
-import React from 'react'
-import { formatDate, formattedData } from '../utils/data'
-import NotesInput from './NotesInput'
-import NotesList from './NotesList'
-import Navbar from './Navbar'
-import '../styles/index.css'
+import { useEffect, useState } from 'react';
+import { formattedData, formatDate } from '../utils/data';
+import NotesInput from './NotesInput';
+import NotesList from './NotesList';
+import Navbar from './Navbar';
+import '../styles/index.css';
 
-class NotesApps extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      notes: formattedData,
-      darkMode: true,
+const NotesApps = () => {
+  const [notes, setNotes] = useState(() => {
+    // Memuat data dari local storage saat komponen dimuat
+    const storedData = localStorage.getItem('formattedData');
+    return storedData ? JSON.parse(storedData) : formattedData;
+  });
+
+  const initialDarkMode = localStorage.getItem("darkMode");
+  const [darkMode, setDarkMode] = useState(initialDarkMode);
+
+  useEffect(() => {
+    // Menyimpan data ke local storage saat terjadi perubahan pada state 'notes'
+    localStorage.setItem('formattedData', JSON.stringify(notes));
+  }, [notes]);
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+
+  useEffect(() => {
+    if (darkMode === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
+  }, [darkMode]);
 
-    this.onDeleteHandler = this.onDeleteHandler.bind(this)
-    this.onAddNotesHandler = this.onAddNotesHandler.bind(this)
-    this.onToggleArchived = this.onToggleArchived.bind(this)
-    this.toggleDarkMode = this.toggleDarkMode.bind(this)
-  }
+  const handleThemeSwitch = () => {
+    setDarkMode(darkMode === "dark" ? "" : "dark");
+  };
 
-  toggleDarkMode() {
-    this.setState((prevState) => ({
-      darkMode: !prevState.darkMode,
-    }))
-  }
+  const onDeleteHandler = (id) => {
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
+  };
 
-  onDeleteHandler(id) {
-    const notes = this.state.notes.filter((notes) => notes.id !== id)
-    this.setState({ notes })
-  }
+  const onAddNotesHandler = ({ title, body }) => {
+    setNotes((prevNotes) => [
+      ...prevNotes,
+      {
+        id: +new Date(),
+        title,
+        body,
+        createdAt: formatDate(+new Date()),
+        archived: false,
+      },
+    ]);
+  };
 
-  onAddNotesHandler({ title, body }) {
-    this.setState((prevState) => {
-      return {
-        notes: [
-          ...prevState.notes,
-          {
-            id: +new Date(),
-            title,
-            body,
-            createdAt: formatDate(+new Date()),
-            archived: false,
-          },
-        ],
+  const onToggleArchived = (id) => {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === id) {
+        return {
+          ...note,
+          archived: !note.archived,
+        };
       }
-    })
-  }
+      return note;
+    });
+    setNotes(updatedNotes);
+  };
 
-  onToggleArchived(id) {
-    this.setState((prevState) => {
-      const updatedNotes = prevState.notes.map((note) => {
-        if (note.id === id) {
-          return {
-            ...note,
-            archived: !note.archived, // Mengubah nilai archived
-          }
-        }
-        return note
-      })
-      return { notes: updatedNotes }
-    })
-  }
+  const activeNotes = notes.filter((note) => !note.archived);
+  const archivedNotes = notes.filter((note) => note.archived);
 
-  render() {
-    // Pisahkan catatan menjadi dua kelompok berdasarkan archived
-    const activeNotes = this.state.notes.filter((note) => !note.archived)
-    const archivedNotes = this.state.notes.filter((note) => note.archived)
-
-    return (
-      <div className='notes-apps'>
-        <Navbar />
-        <div className='content'>
-          <NotesInput addNotes={this.onAddNotesHandler} />
-          <NotesList
-            activeNotes={activeNotes}
-            archivedNotes={archivedNotes}
-            onDelete={this.onDeleteHandler}
-            onToggleArchived={this.onToggleArchived}
-          />
-        </div>
+  return (
+    <div>
+      <Navbar darkMode={darkMode} handleThemeSwitch={handleThemeSwitch}/>
+      <div className='pt-24'>
+        <NotesInput addNotes={onAddNotesHandler} />
+        <NotesList
+          activeNotes={activeNotes}
+          archivedNotes={archivedNotes}
+          onDelete={onDeleteHandler}
+          onToggleArchived={onToggleArchived}
+        />
       </div>
-    )
-  }
-}
+    </div>
+  );
+};
 
-export default NotesApps
+export default NotesApps;
