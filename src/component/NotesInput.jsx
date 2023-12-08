@@ -68,6 +68,7 @@ class NotesInput extends React.Component {
             onChange={this.onTitleChangeEventListener}
             id='judul'
             className='bg-transparent outline-none ring-1 ring-slate-500 p-4 mb-4 rounded hover:ring-slate-800 dark:hover:ring-slate-200 duration-300'
+            autoComplete='off'
           />
           <label
             htmlFor='catatan'
